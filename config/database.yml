@@ -108,6 +108,8 @@ test:
 #
 production:
   <<: *default
-  database: kaj_todo_prod
-  username: kaj_todo
-  password: 123321
+  host: ec2-35-174-88-65.compute-1.amazonaws.com
+  port: 5432
+  database: d3gjt584a6q1un
+  username: oekvqmvndhusgt
+  password: 6459a0a952e064f382cd7300d9ff4c7870430d9a90909d226c692d792a5b79b8
