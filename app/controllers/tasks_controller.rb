@@ -1,9 +1,7 @@
-class TasksController < ApplicationController
-  def index
-    # @active_tasks = Task.get_by_status(Task::ACTIVE)
-    # @completed_tasks = Task.get_by_status(Task::COMPLETED)
-  end
+# frozen_string_literal: true
 
+# TasksController comment
+class TasksController < ApplicationController
   def new
     @task = Task.new
     respond_to do |format|
@@ -18,10 +16,6 @@ class TasksController < ApplicationController
     else
       render json: task.errors, status: :unprocessable_entity
     end
-  end
-
-  def show
-    # @task = Task.find(params[:id])
   end
 
   def edit
@@ -43,6 +37,7 @@ class TasksController < ApplicationController
   end
 
   private
+
   def task_params(*args)
     params.require(:task).permit(*args)
   end

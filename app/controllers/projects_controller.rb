@@ -1,8 +1,7 @@
-class ProjectsController < ApplicationController
-  def index
-    # @projects = Project.all
-  end
+# frozen_string_literal: true
 
+# ProjectsController comment
+class ProjectsController < ApplicationController
   def new
     @project = Project.new
     respond_to do |format|
@@ -17,10 +16,6 @@ class ProjectsController < ApplicationController
     else
       render json: task.errors, status: :unprocessable_entity
     end
-  end
-
-  def show
-    # @project = Project.find(params[:id])
   end
 
   def edit
@@ -42,6 +37,7 @@ class ProjectsController < ApplicationController
   end
 
   private
+
   def project_params(*args)
     params.require(:project).permit(*args)
   end
