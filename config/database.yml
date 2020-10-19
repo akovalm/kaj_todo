@@ -51,7 +51,11 @@ default: &default
 
 development:
   <<: *default
-  database: kaj_todo_dev
+  host: localhost
+  port: 5432
+  database: kaj_todo
+  username: kaj_todo
+  password: 111111
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
