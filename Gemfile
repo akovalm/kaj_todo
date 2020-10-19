@@ -35,6 +35,7 @@ gem 'jquery-rails'
 
 gem 'rubocop', require: false
 
+gem 'devise'
 gem 'cancancan'
 
 group :development, :test do
