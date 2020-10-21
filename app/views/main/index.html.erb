@@ -12,14 +12,16 @@
       <div class="b-pr-title">
         <%= project.name %>
       </div>
-      <div class=" pull-right">
-        <%= link_to edit_project_path(project), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
-        <%= link_to project_path(project), data: {confirm: 'Delete project?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
-      </div>
+      <% if can? :manage, project %>
+        <div class=" pull-right">
+          <%= link_to edit_project_path(project), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
+          <%= link_to project_path(project), data: {confirm: 'Delete project?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
+        </div>
+      <%end %>
     </div>
 
     <% # add new task %>
-    <div class="panel-footer b-add-task">
+    <div class="panel-footer b-add-task <%= can?(:manage, project) ? '' : 'disabled' %>">
       <div class="input-group">
         <%= form_for Task.new, html: {id: "new_task_" + project.id.to_s, class: "form-horizontal"}, remote: true do |t| %>
           <%= t.hidden_field :project_id, id: "task_project_id_" + project.id.to_s, value: project.id %>
@@ -44,9 +46,11 @@
         <% project.tasks.each do |task| %>
           <tr>
             <td class="col1">
-              <div class="t-col-chb hidden">
-                <label><input type="checkbox"></label>
-              </div>
+              <% if can? :manage, task %>
+                <div class="t-col-chb hidden">
+                  <label><input type="checkbox"></label>
+                </div>
+              <% end %>
             </td>
             <td class="col2"></td>
             <td class="col3">
@@ -57,10 +61,12 @@
               </div>
             </td>
             <td class="col4 text-right">
-              <div class="t-col-btns hidden">
-                <%= link_to edit_task_path(task), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
-                <%= link_to task_path(task), data: {confirm: 'Delete task?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
-              </div>
+              <% if can? :manage, task %>
+                <div class="t-col-btns hidden">
+                  <%= link_to edit_task_path(task), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
+                  <%= link_to task_path(task), data: {confirm: 'Delete task?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
+                </div>
+              <%end %>
             </td>
           </tr>
         <% end %>
@@ -73,7 +79,7 @@
 
 </div>
 
-<div class="b-add-project text-center">
+<div class="b-add-project text-center <%= can?(:manage, @projects) ? '' : 'disabled' %>">
   <%= link_to "Add ToDo List", new_project_path, remote: true, class: "btn btn-primary" %>
 </div>
 

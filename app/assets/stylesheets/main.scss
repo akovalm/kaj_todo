@@ -8,6 +8,10 @@ body {
   background: #999999;
   background: linear-gradient(-90deg, orange, #999999);
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 .top15 {
   margin-top: 15px;
 }

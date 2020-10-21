@@ -2,6 +2,8 @@
 
 # TasksController comment
 class TasksController < ApplicationController
+  load_and_authorize_resource
+
   def new
     @task = Task.new
     respond_to do |format|
