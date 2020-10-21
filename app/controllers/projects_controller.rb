@@ -2,6 +2,8 @@
 
 # ProjectsController comment
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
+
   def new
     @project = Project.new
     respond_to do |format|
