@@ -14,8 +14,12 @@
       </div>
       <% if can? :manage, project %>
         <div class=" pull-right">
-          <%= link_to edit_project_path(project), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
-          <%= link_to project_path(project), data: {confirm: 'Delete project?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
+          <%= link_to edit_project_path(project), remote: true do %>
+            <i class="glyphicon glyphicon-pencil mx-5"></i>
+          <% end %>
+          <%= link_to project_path(project), data: {confirm: 'Delete project?'}, method: 'delete', remote: true do %>
+            <i class="glyphicon glyphicon-trash mx-5"></i>
+          <% end %>
         </div>
       <%end %>
     </div>
@@ -44,11 +48,14 @@
       <table class="table table-striped table-bordered">
         <tbody>
         <% project.tasks.each do |task| %>
-          <tr>
+          <tr class="b-task">
             <td class="col1">
               <% if can? :manage, task %>
                 <div class="t-col-chb hidden">
-                  <label><input type="checkbox"></label>
+                  <label>
+                    <input type="checkbox" data-id="<%= task.id %>"
+                      <%= task.status == Task::COMPLETED ? 'checked' : '' %>>
+                  </label>
                 </div>
               <% end %>
             </td>
