@@ -29,6 +29,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    puts "task: #{@task}, task_params: #{task_params}"
     @task.update(task_params)
     if params[:commit].nil? # xhr
       render json: { name: @task.name, status: Task::STATUSES[@task.status] }, status: :ok
@@ -45,6 +46,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:id, :name, :status, :project_id)
+    params.require(:task).permit(:id, :name, :status, :project_id, :deadline)
   end
 end

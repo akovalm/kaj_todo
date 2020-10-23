@@ -4,6 +4,8 @@
 
 $(document).ready ->
 
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+
   $(document).on 'mouseover', '.b-tasks tr', (event) ->
     event.preventDefault()
     $(@).find('.t-col-chb').toggleClass('hidden');

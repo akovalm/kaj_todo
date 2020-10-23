@@ -18,7 +18,7 @@ $(document).ready ->
 
     if id != undefined && parseInt(id) > 0
       $.ajax
-        url: 'tasks/' + id
+        url: "tasks/#{id}"
         type: 'patch'
         data: { task: { id: id, status: status } }
         dataType: 'json'
