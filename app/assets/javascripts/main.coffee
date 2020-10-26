@@ -27,6 +27,9 @@ $(document).ready ->
         error: (data) ->
           console.log("Changing task (id=#{id}) position failed")
 
+
+#  Toggle visibility of tasks control options
+
   $(document).on 'mouseover', '.b-tasks li', (event) ->
     event.preventDefault()
     $(@).find('.col1').removeClass('invisible');

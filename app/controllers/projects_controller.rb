@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new(project_params(:name))
+    project = Project.new(project_params)
     if project.save
       redirect_to root_url
     else
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @project.update(project_params(:name))
+    @project.update(project_params)
     redirect_to root_url
   end
 
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def project_params(*args)
-    params.require(:project).permit(*args)
+  def project_params
+    params.require(:project).permit(:id, :name)
   end
 end
