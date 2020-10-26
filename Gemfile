@@ -27,11 +27,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'pg'
 
+gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'sassc-rails'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'rubocop', require: false
 

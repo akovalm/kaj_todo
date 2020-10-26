@@ -46,20 +46,30 @@ body {
 .b-tasks {
   padding: 0;
 }
-.b-tasks table {
+.b-tasks {
   margin-bottom: 0;
   color: #666666;
 }
-.b-tasks table .col1 {
-  width: 30px;
+.b-tasks .col1 {
+  float: left;
+  width: auto;
+  padding: 0 10px;
+  border-right: solid 1px #eee;
 }
-.b-tasks table .col2 {
+.b-tasks .col2 {
   width: 5px;
   padding: 0;
 }
-.b-tasks table .col3 {}
-.b-tasks table .col4 {
-  width: 70px;
+.b-tasks .col3 {
+  float: left;
+  width: auto;
+  padding: 0 10px;
+}
+.b-tasks .col4 {
+  float: right;
+  width: auto;
+  padding: 0 10px;
+  border-left: solid 1px #eee;
 }
 .b-tasks a {
   color: #666666;
@@ -69,4 +79,20 @@ body {
 }
 .t-col-chb input[type=checkbox] {
   margin: 0;
+}
+
+ul.sortable-tasks {
+  width: 100%;
+  float: left;
+  clear: right;
+  padding: 0px;
+  margin: 0;
+}
+ul.sortable-tasks li {
+  width: 100%;
+  list-style: none;
+  float: left;
+  clear: left;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
