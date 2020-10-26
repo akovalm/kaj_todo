@@ -33,6 +33,7 @@ gem 'font-awesome-sass'
 gem 'sassc-rails'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'rubocop', require: false
 

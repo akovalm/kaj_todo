@@ -21,7 +21,7 @@
             <i class="glyphicon glyphicon-trash mx-5"></i>
           <% end %>
         </div>
-      <%end %>
+      <% end %>
     </div>
 
     <% # add new task %>
@@ -43,42 +43,42 @@
       </div>
     </div>
 
-    <% # tasks list %>
+    <% # new task list %>
     <div class="panel-body b-tasks">
-      <table class="table table-striped table-bordered">
-        <tbody>
-        <% project.tasks.each do |task| %>
-          <tr class="b-task">
-            <td class="col1">
-              <% if can? :manage, task %>
-                <div class="t-col-chb hidden">
-                  <label>
-                    <input type="checkbox" data-id="<%= task.id %>"
-                      <%= task.status == Task::COMPLETED ? 'checked' : '' %>>
-                  </label>
-                </div>
-              <% end %>
-            </td>
-            <td class="col2"></td>
-            <td class="col3">
-              <div class="t-col-info">
-                <div class="task-title">
-                  <%= task.name %> (<%= task.status_name %>)
-                </div>
+      <ul class="sortable-tasks">
+      <% project.tasks.each do |task| %>
+        <li class="b-task" data-id="<%= task.id %>" data-position="<%= task.position %>">
+          <div class="col1 invisible">
+            <% if can? :manage, task %>
+              <div class="t-col-chb">
+                <label>
+                  <input type="checkbox" data-id="<%= task.id %>"
+                         <%= task.status == Task::COMPLETED ? 'checked' : '' %>>
+                </label>
               </div>
-            </td>
-            <td class="col4 text-right">
-              <% if can? :manage, task %>
-                <div class="t-col-btns hidden">
-                  <%= link_to edit_task_path(task), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
-                  <%= link_to task_path(task), data: {confirm: 'Delete task?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
-                </div>
-              <%end %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+            <% end %>
+          </div>
+
+          <div class="col3">
+            <div class="t-col-info">
+              <div class="task-title">
+                <%= task.name %> (<%= task.status_name %>)
+              </div>
+            </div>
+          </div>
+
+          <div class="col4 invisible text-right">
+            <% if can? :manage, task %>
+              <div class="t-col-btns">
+                <a href="#"><i class="glyphicon glyphicon-move mx-5"></i></a>
+                <%= link_to edit_task_path(task), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
+                <%= link_to task_path(task), data: {confirm: 'Delete task?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
+              </div>
+            <%end %>
+          </div>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </div>
 
