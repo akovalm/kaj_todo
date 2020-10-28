@@ -2,6 +2,8 @@
 
 # ProjectsController comment
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
+
   def new
     @project = Project.new
     respond_to do |format|
@@ -10,7 +12,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new(project_params(:name))
+    project = Project.new(project_params)
+    project.user_id = current_user.id unless current_user.nil?
     if project.save
       redirect_to root_url
     else
@@ -27,7 +30,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    @project.update(project_params(:name))
+    @project.update(project_params)
     redirect_to root_url
   end
 
@@ -38,7 +41,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def project_params(*args)
-    params.require(:project).permit(*args)
+  def project_params
+    params.require(:project).permit(:id, :name, :user_id)
   end
 end

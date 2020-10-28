@@ -19,6 +19,13 @@
       </div>
     </div>
     <div class="form-group">
+      <%= t.label :deadline, "Deadline:", class: "control-label col-sm-2" %>
+      <div class="col-sm-8">
+        <%= t.text_field :deadline, data: {provide: 'datepicker'}, class: "form-control" %>
+        <%#= t.text_field :deadline, class: "datepicker" %>
+      </div>
+    </div>
+    <div class="form-group">
       <div class="col-sm-offset-2 col-sm-6">
         <%= t.submit task.new_record? ? "Create Task": "Update Task", class: "btn btn-success" %>
       </div>

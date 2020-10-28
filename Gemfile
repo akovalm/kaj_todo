@@ -27,17 +27,24 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'pg'
 
+gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'sassc-rails'
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'rubocop', require: false
+
+gem 'cancancan'
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
