@@ -3,6 +3,6 @@
 # MainController comment
 class MainController < ApplicationController
   def index
-    @projects = Project.default_ordered
+    @projects = Project.default
   end
 end

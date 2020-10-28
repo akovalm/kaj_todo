@@ -4,15 +4,16 @@
 
   <% @projects.each do |project| %>
 
-  <div class="panel panel-primary">
+    <% if can? :manage, project %>
 
-    <% # project header %>
-    <div class="panel-heading">
-      <i class="glyphicon glyphicon-list-alt mx-5"></i>
-      <div class="b-pr-title">
-        <%= project.name %>
-      </div>
-      <% if can? :manage, project %>
+    <div class="panel panel-primary">
+
+      <% # project header %>
+      <div class="panel-heading">
+        <i class="glyphicon glyphicon-list-alt mx-5"></i>
+        <div class="b-pr-title">
+          <%= project.name %>
+        </div>
         <div class=" pull-right">
           <%= link_to edit_project_path(project), remote: true do %>
             <i class="glyphicon glyphicon-pencil mx-5"></i>
@@ -21,72 +22,68 @@
             <i class="glyphicon glyphicon-trash mx-5"></i>
           <% end %>
         </div>
-      <% end %>
-    </div>
-
-    <% # add new task %>
-    <div class="panel-footer b-add-task <%= can?(:manage, project) ? '' : 'disabled' %>">
-      <div class="input-group">
-        <%= form_for Task.new, html: {id: "new_task_" + project.id.to_s, class: "form-horizontal"}, remote: true do |t| %>
-          <%= t.hidden_field :project_id, id: "task_project_id_" + project.id.to_s, value: project.id %>
-          <div class="input-group addon">
-            <span class="input-group-addon">
-              <i class="fa fa-plus text-success"></i>
-            </span>
-            <%= t.text_field :name, id: "task_name_" + project.id.to_s, class: "form-control", required: true, placeholder: "Start typing here to create a task..." %>
-            <div class="input-group-btn">
-              <%#= link_to "Add Task", new_task_path, remote: true, class: "btn btn-success" %>
-              <%= t.submit "Add Task", class: "btn btn-success" %>
-            </div>
-          </div>
-        <% end %>
       </div>
-    </div>
 
-    <% # new task list %>
-    <div class="panel-body b-tasks">
-      <ul class="sortable-tasks">
-      <% project.tasks.each do |task| %>
-        <li class="b-task" data-id="<%= task.id %>" data-position="<%= task.position %>">
-          <div class="col1 invisible">
-            <% if can? :manage, task %>
+      <% # add new task %>
+      <div class="panel-footer b-add-task">
+        <div class="input-group">
+          <%= form_for Task.new, html: {id: "new_task_" + project.id.to_s, class: "b-new-task form-horizontal"}, data: {'project-id': project.id.to_s}, remote: true do |t| %>
+            <%= t.hidden_field :project_id, id: "task_project_id_" + project.id.to_s, value: project.id %>
+            <div class="input-group addon">
+              <span class="input-group-addon">
+                <i class="fa fa-plus text-success"></i>
+              </span>
+              <%= t.text_field :name, id: "task_name_" + project.id.to_s, class: "form-control", required: true, placeholder: "Start typing here to create a task..." %>
+              <div class="input-group-btn">
+                <%#= link_to "Add Task", new_task_path, remote: true, class: "btn btn-success" %>
+                <%= t.submit "Add Task", class: "btn btn-success" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% # task list %>
+      <div class="panel-body b-tasks">
+        <ul class="sortable-tasks" id="sortable-tasks-<%= project.id.to_s %>">
+        <% project.tasks.each do |task| %>
+          <li class="b-task" data-id="<%= task.id %>" data-position="<%= task.position %>">
+            <div class="col1 invisible">
               <div class="t-col-chb">
                 <label>
                   <input type="checkbox" data-id="<%= task.id %>"
-                         <%= task.status == Task::COMPLETED ? 'checked' : '' %>>
+                    <%= task.status == Task::COMPLETED ? 'checked' : '' %>>
                 </label>
               </div>
-            <% end %>
-          </div>
+            </div>
 
-          <div class="col3">
-            <div class="t-col-info">
-              <div class="task-title">
-                <%= task.name %> (<%= task.status_name %>)
+            <div class="col3">
+              <div class="t-col-info">
+                <div class="task-title">
+                  <%= task.name %> (<%= task.status_name %>)
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col4 invisible text-right">
-            <% if can? :manage, task %>
+            <div class="col4 invisible text-right">
               <div class="t-col-btns">
                 <a href="#"><i class="glyphicon glyphicon-move mx-5"></i></a>
                 <%= link_to edit_task_path(task), remote: true do %><i class="glyphicon glyphicon-pencil mx-5"></i><% end %>
                 <%= link_to task_path(task), data: {confirm: 'Delete task?'}, method: 'delete', remote: true do %><i class="glyphicon glyphicon-trash mx-5"></i><% end %>
               </div>
-            <%end %>
-          </div>
-        </li>
-      <% end %>
-      </ul>
+            </div>
+          </li>
+        <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
+    <% end %>
 
   <% end %>
 
 </div>
 
-<div class="b-add-project text-center <%= can?(:manage, @projects) ? '' : 'disabled' %>">
+<div class="b-add-project text-center">
   <%= link_to "Add ToDo List", new_project_path, remote: true, class: "btn btn-primary" %>
 </div>
 
