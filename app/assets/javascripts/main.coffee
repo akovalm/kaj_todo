@@ -10,7 +10,7 @@ $(document).ready ->
 
   init_sortable = (sortable) ->
     $(sortable).sortable
-      connectWith: '.sortable-tasks',
+#      connectWith: '.sortable-tasks',
       update: (event, ui) ->
         movement = if ui.position.top - ui.originalPosition.top > 0 then 'down' else 'up'
         id = ui.item.data('id')
@@ -34,7 +34,7 @@ $(document).ready ->
   init_sortable('.sortable-tasks')
 
 #  todo: refresh sortable after add new task...
-#  $(document).on 'ajax:success', '.b-new-task', (e) ->
+  $(document).on 'ajax:success', '.b-new-task', (e) ->
 #    $this = $(@)
 #    project_id = $this.data('project-id')
 #    sortable_elem_id = '#sortable-tasks-' + project_id
@@ -44,6 +44,9 @@ $(document).ready ->
 #    else
 #      console.log('not initialized')
 #      init_sortable($(document).find(sortable_elem_id))
+
+    # temporary... for working tasks sortable after add new
+#    location.reload()
 
   #
 
