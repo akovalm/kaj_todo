@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  before_save :role=
+  after_initialize :default_role
 
   ROLES = { 0 => :guest, 1 => :user, 2 => :admin }.freeze
 
@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   private
 
-  def role=(role = 1)
+  def default_role(role = 1)
     self.role = role
   end
 end
