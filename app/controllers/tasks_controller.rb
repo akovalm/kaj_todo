@@ -13,6 +13,7 @@ class TasksController < ApplicationController
 
   def create
     task = Task.new(task_params)
+    task.user_id = current_user.id unless current_user.nil?
     if task.save
       redirect_to root_url
     else
@@ -46,6 +47,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:id, :name, :status, :project_id, :deadline, :position)
+    params.require(:task).permit(:id, :name, :status, :project_id, :deadline, :position, :user_id)
   end
 end
